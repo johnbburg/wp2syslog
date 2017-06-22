@@ -112,6 +112,16 @@ class WP2SYSLOG_SETTINGS{
 								'WP2SYSLOGoptions'
 								);
 
+
+          add_settings_field(
+              'wp2syslog_facility',
+              __( 'Logging facility to use. See <a href="http://php.net/manual/en/function.openlog.php">openlog()</a>.  LOG_USER is the only valid log type in windows operating systems', 'wordpress' ),
+              array($this,'wp2syslog_checkbox_facility_render'),
+              'WP2SYSLOGoptions',
+              'wp2syslog_options_section'
+          );
+
+
 				add_settings_field(
 								'coreevents',
 								__( 'Log Wordpress core events', 'wordpress' ),
@@ -199,6 +209,23 @@ class WP2SYSLOG_SETTINGS{
 
 				return $input;
 		}
+
+		public function wp2syslog_checkbox_facility_render () {
+
+          $option = $this->options['wp2syslog_facility'];
+          
+		    ?> <select name="wp2syslog_options[wp2syslog_facility]">
+                    <option value="LOG_DEAMON" <?php selected($option, 'LOG_DEAMON') ?>>LOG_DEAMON</option>
+                    <option value="LOG_LOCAL1" <?php selected($option, 'LOG_LOCAL1') ?>>LOG_LOCAL1</option>
+                    <option value="LOG_LOCAL2" <?php selected($option, 'LOG_LOCAL2') ?>>LOG_LOCAL2</option>
+                    <option value="LOG_LOCAL3" <?php selected($option, 'LOG_LOCAL3') ?>>LOG_LOCAL3</option>
+                    <option value="LOG_LOCAL4" <?php selected($option, 'LOG_LOCAL4') ?>>LOG_LOCAL4</option>
+                    <option value="LOG_LOCAL5" <?php selected($option, 'LOG_LOCAL5') ?>>LOG_LOCAL5</option>
+                    <option value="LOG_LOCAL6" <?php selected($option, 'LOG_LOCAL6') ?>>LOG_LOCAL6</option>
+                    <option value="LOG_LOCAL7" <?php selected($option, 'LOG_LOCAL7') ?>>LOG_LOCAL7</option>
+                    <option value="LOG_USER" <?php selected($option, 'LOG_USER') ?>>LOG_USER</option>
+                    </select> <?php
+        }
 
 		public function wp2syslog_checkbox_actions_render($action_name)
 		{
