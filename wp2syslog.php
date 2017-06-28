@@ -215,12 +215,17 @@ class WP2SYSLOG{
 				$block_header = htmlspecialchars($block_header);
 
 				/* First log via syslog. */
-				openlog($module, LOG_PID, LOG_DAEMON);
+        $facility = LOG_DAEMON;
+        $check_options = $this->settings->get_options();
+				if(isset($check_options['wp2syslog_facility']) && defined($check_options['wp2syslog_facility'])) {
+          $facility = constant($check_options['wp2syslog_facility']);
+        }
+
+				openlog($module, LOG_PID, $facility);
 				syslog(LOG_WARNING, "$block_header ".home_url()." $severityname: $message");
 				closelog();
 
 				/* Then write a record into table. */
-				$check_options=$this->settings->get_options();
 				if($check_options['db']=='true' && $this->init_status=='complete')
 				{
 						global $wpdb;
