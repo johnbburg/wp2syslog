@@ -213,9 +213,10 @@ class WP2SYSLOG_SETTINGS{
 		public function wp2syslog_checkbox_facility_render () {
 
           $option = $this->options['wp2syslog_facility'];
-          
+
 		    ?> <select name="wp2syslog_options[wp2syslog_facility]">
                     <option value="LOG_DEAMON" <?php selected($option, 'LOG_DEAMON') ?>>LOG_DEAMON</option>
+                    <option value="LOG_LOCAL0" <?php selected($option, 'LOG_LOCAL0') ?>>LOG_LOCAL0</option>
                     <option value="LOG_LOCAL1" <?php selected($option, 'LOG_LOCAL1') ?>>LOG_LOCAL1</option>
                     <option value="LOG_LOCAL2" <?php selected($option, 'LOG_LOCAL2') ?>>LOG_LOCAL2</option>
                     <option value="LOG_LOCAL3" <?php selected($option, 'LOG_LOCAL3') ?>>LOG_LOCAL3</option>
