@@ -143,7 +143,7 @@ class WP2SYSLOG{
 
 		function wp2syslog($module, $message, $severity=1, $cut=500, $userid=0, $time=0)
 		{
-				$useragent=filter_var($_SERVER['HTTP_USER_AGENT'],FILTER_SANITIZE_STRING|FILTER_SANITIZE_MAGIC_QUOTES);
+				$useragent=filter_var($_SERVER['HTTP_USER_AGENT'],FILTER_SANITIZE_STRING|FILTER_SANITIZE_ADD_SLASHES);
 				$useragent=strlen($useragent)
 						? $useragent
 						: 'na';
